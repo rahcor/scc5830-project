@@ -1,36 +1,56 @@
-# Repository for final project of Image Processing and Analysis course
+# Final project of Image Processing and Analysis course
+
+Student: R.R.M.
 
 **Warning!**
 The images in this repository may be disgusting to some people.
 
 ## Project proposal theme in a sentence
-Segmentation and analysis applied to photos of bird droppings for quantitative morphological characterization
+Segmentation and analysis applied to photos of bird droppings for morphological normality characterization.
 
 ##  Abstract
-Health conditions and sensibility to some kind of foods may affect the gastrointestinal tract of birds leading to changes in the morphology of its excrements (also called bird droppings).
-The healthy dropping basically consist of two phases: a long cilindrical green solid shape imerse in a heterogeneous white and translucid liquid.
-Some health conditions, like diarhea and bleeding, may disturb the usual morphology and color, while the quantity of ingested water and food may affect the area of the dropping.
+Excrements (also called bird droppings) of a healthy bird consists of two phases: a long cylindrical green solid shape immerse in a heterogeneous white and translucid liquid.
+This morphology is subjected to some expected variance due to random bird alimentary routines, like the quantity of water and the type of food ingested.
+However, health conditions and sensibility to some kind of food may significantly disturb the usual morphology and color of the excrements, for example when occur diarrhea or bleeding.
 
-In this project, I expect to process photos of _psittacidae_ droppings to extract information that will allow quantification of its morphology.
-The information to be extracted was grouped in phases according to the expected difficulty of image processing:
-a) total area, area of solid green phase, area of the white on liquid phase;
-b) presence and intensity of red (indicative of blood);
-c) presence of 'dots' from undigested food on the solid phase;
-d) nº of segments of the solid part;
-e) eventually other ones that may emerge during the development.
+In this project, a set of photos of healthy _psittacidae_ morning droppings will be processed to extract descriptors reflecting the usual morphology characteristics.
+These descriptors will comprehend: area measurement, texture information and color information.
+All measurements from these healthy droppings will be gathered to compose normality curves on each descriptor, which may be useful for the detection of future anomalous droppings that might significantly deviate from the expected values.
 
-Photos will be taken personally by the student using a digital camera (DSLR raw, DSLR jpeg, new smartphone or old smartphone, whichever have potential for better results) with the dropping placed on a clean sheet of paper along a reference scale.
-Some cases like (b) and (c) must use supplemented images from the internet, because the voluntary subject is healthy.
-It is expected that those cases may be left out of this project if no good quality images could be found.
-
-All measurements from healthy droppings will be gathered to compose a normality curve for the subject.
-
-If time allows, a secondary objective of inspection of variances using ANOVA and a Design of Experiments scheme for the following treatments may be explored:
-  - dslr raw, dslr, new smartphone, old smartphone
-  - whithin the same camera
-  - levels of image compression
-  - fresh, dry dropping
-  - calculation of areas using reference scale or using image metadata and sensor specs (if possible)
-  - white paper, brown paper
+Photos have been taken personally by the student using a DSLR camera with the dropping placed on a clean sheet of white paper along a brown reference scale of constant and known size.
 
 
+## Expected steps in processing the images
+
+* K-means is applied to the original images to segment the background, the reference scale, the solid green phase and the liquid white/translucid phase.
+* From the reference scale, the ratio area/pixel will be calculated and the white balance will be adjusted to match the reference scale color.
+* From the group containing solid and liquid dropping, the total area will be measured^1, homogeneity descriptor will be calculated^2, fft spectrum will be derived and the full image submitted to bag of features.
+* From the solid/green segment, area, color histogram^3 and homogeneity^2 descriptor will be gathered.
+* From the white segment, area and color will be measured.
+* Finally, the proportion of area of solid and white^4 will be calculated.
+
+The numbers above some words in the previous list corresponds to some health conditions that the measurement tries to capture:
+
+^1 Small intake of food
+^2 diarrhea
+^3 blood
+^4 imbalance in water/food intake
+
+
+### Summary of methods that are expected to be employed
+
+* Segmentation using K-means
+* Counting pixels
+* Haralick descriptors
+* Color histograms
+* FFT spectrum
+* Bag of features
+
+
+## Output expectation 
+
+Three types of normality curve are expected as output:
+
+* absolute value (area, Haralick)
+* distribution of distances between images (histogram, fft spectrum)
+* distribution of distances from the mean (features from bag of features)
